@@ -1,0 +1,34 @@
+{
+    "split": {
+      "input_file_path": "data/original_dataset.txt.txt",
+      "output_leak_path": "data/leaked.txt",
+      "output_source_path": "data/query_source.txt",
+      "split_ratio": 0.9,
+      "method": "credentials"
+    },
+  "query_generation": {
+      "lengths": 5,
+      "num_queries": 200000000,
+      "query_type": "pass",
+      "scenario_config": {
+        "asyn": 1,
+        "clean": 1,
+        "intercept": 0.1, 
+        "active": 0.01
+      } 
+    },
+    "identification_attack": {
+      "length_low": 10,
+      "length_high": 21,
+      "min_threshold": 2
+    },
+    "recovery_attack": {
+      "connect_overlap": 2,
+      "baseline_path": "intermediate/recovery/leaked_train_PGM_Markov.txt"
+    },
+    "queries_output_dir": "intermediate/queries/Scenario_1",
+    "identification_output_dir": "intermediate/identification/Scenario_1/",
+    "recovery_output_dir": "intermediate/recovery/Scenario_1/",
+    "output_guess_result": "results/Scenario_1"
+  }
+  
