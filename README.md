@@ -61,17 +61,6 @@ pip install -r requirements.txt
 ```
 
 
----
-
-## 🚀 Quick Start
-
-Example commands to run a simulation or an attack:
-
-
-```bash
-# Run a query simulation (Note that running simulation needs datasets)
-python experiments/run_experiments.py
-```  
 
 ---
 
