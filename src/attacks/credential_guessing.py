@@ -10,16 +10,10 @@ These components are designed to integrate into a credential attack pipeline, wh
 hash information and password reuse are leveraged to increase guessing success.
 """
 
-import ast
 import hashlib
 from tqdm import tqdm
-from sklearn.metrics.pairwise import cosine_similarity
-from sklearn.feature_extraction.text import TfidfVectorizer
-from itertools import combinations
-import random
 from collections import defaultdict, Counter
 import os
-import re
 
 class CredentialGuessing:
 

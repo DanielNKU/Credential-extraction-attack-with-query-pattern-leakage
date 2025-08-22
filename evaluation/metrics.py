@@ -79,17 +79,12 @@ def calculate_connected_success_rate(connected_result, query_type, origin_path, 
     index = defaultdict(set)
     connected_list = []
 
-    output = True
     for key, row in tqdm(enumerate(connected_result), total=len(connected_result), desc='Loading'):
         candidate_list = row[0] + row[2]
-        #if output:
-            #print(candidate_list)
-            #output = False
         connected_list.append(candidate_list)
         for matches in candidate_list:
             index[matches].add(key)
 
-    output = True
     cnt = 0
     with open(origin_path, 'r', encoding='utf8') as f:
         for line in f:
@@ -105,10 +100,6 @@ def calculate_connected_success_rate(connected_result, query_type, origin_path, 
                 continue
             best_idx = max(counter, key=lambda x: counter[x])
             if counter[best_idx] >= overlap:
-                #if output:
-                    #print(connected_list[best_idx])
-                    #print(plaintext)
-                    #output = False
                 success += 1
     print(cnt)
     return success

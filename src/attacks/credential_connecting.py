@@ -8,7 +8,6 @@ and which do not, effectively "connecting" guessed passwords to real user accoun
 
 """
 
-import os
 from tqdm import tqdm
 import hashlib
 from collections import defaultdict, Counter
@@ -108,7 +107,6 @@ class CredentialConnectingAttack:
                     continue
                 match_test.add(str(sorted(matches_list)))
                 unmatches_list = list((Counter(identified_queries[idpos]) - Counter(matches_hash_list)).elements())
-                # unmatches_list = list((Counter(hash_leaked_dataset[indices[pos]]) - Counter(matches_hash_list)).elements())
                 other_candidate = list((Counter(self._credentials_data[indices[pos]]) - Counter(matches_list)).elements())
                 connected_results.append([matches_list, unmatches_list, other_candidate])
         

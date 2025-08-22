@@ -102,7 +102,6 @@ def generate_queries(leak_file_path: str, source_file_path: str, num_queries: in
             credentials = line.split('\t')[:-1]
             query_user_list.append(credentials)
 
-    # leaked_set = set()
     leaked_set = load_leaked_dataset(leak_file_path, query_type)
 
     generated_query_series_num = 0 # a counter
