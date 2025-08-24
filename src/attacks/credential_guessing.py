@@ -23,50 +23,6 @@ class CredentialGuessing:
     """
 
     @staticmethod
-    def generate_test_set_rPGM(connected_result_path:str, origin_path: str, output_path: str) -> None:
-        origin_list = []
-        with open(origin_path, 'r', encoding='utf8') as f:
-            for line in f:
-                posp, _, unmatches_list, plaintext = eval(line)
-                if len(plaintext) < 10 or _ < 4 or len(plaintext) > 20:
-                    continue
-                origin_list.append(line[:-1])
-        
-        index = defaultdict(set)
-        connected_list = []
-        with open(connected_result_path, 'r', encoding='utf8') as c:
-            connected_pos = 0
-            for line in c:
-                match_list, unmatches_hash, other_candidate = eval(line)
-                connected_list.append(match_list + other_candidate)
-                for matches in match_list:
-                    hashed = hashlib.sha256(matches.encode()).hexdigest()[:5]
-                    index[hashed].add(connected_pos)
-                for unmatches in unmatches_hash:
-                    index[unmatches].add(connected_pos)
-                connected_pos += 1
-
-        with open(os.path.join(output_path, f"guess_list/connected_select.txt"), 'w', encoding='utf8') as w, open(os.path.join(output_path, f"guess_list/connected_oldpw.txt"), 'w', encoding='utf8') as g:
-            total_old_set = set()
-            for it in origin_list:
-                w.write(it+'\n')
-                posp, _, unmatches_list, plaintext = eval(it)
-                counter = Counter()
-                for unmatches in unmatches_list:
-                    for idx in index.get(unmatches, []):
-                        counter[idx] += 1
-                if not counter:
-                    continue
-                best_idx = max(counter, key=lambda x: counter[x])
-                old_list = connected_list[best_idx]
-                for pwd in old_list:
-                    total_old_set.add(pwd)
-
-            for password in total_old_set:
-                g.write('_'+'\t'+str(password)+'\t'+str(password)+'\n')
-
-
-    @staticmethod
     def extract_old_passwords_from_connected_result(connected_result_path: str, output_path: str, output_pos_path: str) -> None:
         """
         Extract all old passwords (connected and usable) from a connected result file.
@@ -87,13 +43,8 @@ class CredentialGuessing:
                     old_password_set.add(pw)
                 for pw in other_candidate:
                     old_password_set.add(pw)
-                for pw in old_password_set:
-                    if " " in pw or len(pw) < 5 or len(pw) > 31:
-                        continue
-                    if not pw.isprintable():
-                        continue
-                    pos += 1
             for pw in old_password_set:
+                # Write a proper format for your targeted password guessing model
                 w.write('_'+'\t'+str(pw)+'\t'+str(pw)+'\n')
 
     @staticmethod

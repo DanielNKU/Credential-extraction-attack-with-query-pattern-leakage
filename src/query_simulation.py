@@ -236,7 +236,6 @@ def generate_queries(leak_file_path: str, source_file_path: str, num_queries: in
                 query = hashlib.sha256(p.encode()).hexdigest()
                 content_list.append(p)
                 prefix_list.append(query[:query_length])
-        #if len(prefix_list) > 1:
         origin_plaintext_file.write(str((user, query_pm_user_frequency[user], prefix_list, content_list)) + '\n')
     print('Results generated')
 

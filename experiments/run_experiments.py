@@ -108,85 +108,16 @@ def main():
             f.write(str(r)+'\n')
 
     # === Step 5: Credential Guessing === 
-    CredentialGuessing.build_training_data_from_leaked_PGM(os.path.join(config["recovery_output_dir"], f"{qtype}_connected_queries_len{lengths}_min{connected_overlap}.txt", ))
-    CredentialGuessing.build_training_data_from_leaked_PGM(split_cfg["output_leak_path"], "data/origin/NazAPI/leaked_train_PGM.txt", qtype)
-    CredentialGuessing.build_training_data_from_leaked_rPGM(split_cfg["output_leak_path"], "data/origin/NazAPI/leaked_train_rPGM_2.txt", qtype)
-    
     CredentialGuessing.extract_old_passwords_from_connected_result(os.path.join(config["recovery_output_dir"], f"{qtype}_connected_queries_len{lengths}_min2.txt"), os.path.join(config["recovery_output_dir"], f"guess_list/{qtype}_old_password_list_len{lengths}.txt"), os.path.join(config["recovery_output_dir"], f"guess_list/{qtype}_old_password_pos_len{lengths}.txt"))
-    CredentialGuessing.extract_old_passwords_from_connected_result_ideal(split_cfg["output_leak_path"], split_cfg["output_source_path"], os.path.join(config["queries_output_dir"], f"{qtype}_plain_queries_len{lengths}.txt"), os.path.join(config["recovery_output_dir"], f"guess_list/{qtype}_ideal_old_password_list_len{lengths}.txt"), os.path.join(config["recovery_output_dir"], f"guess_list/{qtype}_ideal_old_password_pos_len{lengths}.txt"))
-    
-    CredentialGuessing.generate_test_set_ideal(
-        leak_set_path=split_cfg["output_leak_path"],
-        origin_path=os.path.join(config["queries_output_dir"], f"{qtype}_plain_queries_len{lengths}.txt"),
-        query_set_path=split_cfg["output_source_path"],
-        output_path=config["recovery_output_dir"]
-    )
-    
-    leak_set = load_leaked_dataset(split_cfg["output_leak_path"], qtype)
-    CredentialGuessing.run_guessing_and_match_hashes_PGM(
-        guess_file_path=recovery_config["baseline_path"],
-        origin_path=os.path.join(config["queries_output_dir"], f"{qtype}_plain_queries_len{lengths}.txt"),
-        output_path=os.path.join(config["output_guess_result"], f"{qtype}_final_results_len{lengths}_baseline.txt"), 
-        leak_set=leak_set
-    )
-    
-    for num in range(5):
-        CredentialGuessing.run_guessing_and_match_hashes_rPGM_ideal(
-            normal_guess_file_path=recovery_config["baseline_path"],
-            guess_file_path=os.path.join(config["recovery_output_dir"], f"guess_list/ideal_guess_exp{num}.txt"),
-            origin_path=os.path.join(config["recovery_output_dir"], f"guess_list/ideal_select_exp{num}.txt"),
-            output_path=os.path.join(config["output_guess_result"], f"{qtype}_final_len{lengths}_ideal_exp{num}.txt"),
-            leak_set_path=leak_set
-        )
-
-    CredentialGuessing.generate_test_set_ideal_nosample(
-        leak_set_path=split_cfg["output_leak_path"],
-        origin_path=os.path.join(config["queries_output_dir"], f"{qtype}_plain_queries_len{lengths}.txt"),
-        query_set_path=split_cfg["output_source_path"],
-        output_path=config["recovery_output_dir"]
-    )
-
-    CredentialGuessing.generate_test_set_ideal(
-        leak_set_path=split_cfg["output_leak_path"],
-        origin_path=os.path.join(config["queries_output_dir"], f"{qtype}_plain_queries_len{lengths}.txt"),
-        query_set_path=split_cfg["output_source_path"],
-        output_path=config["recovery_output_dir"]
-    )
-
-    CredentialGuessing.generate_test_set_rPGM(
-        connected_result_path=os.path.join(config["recovery_output_dir"], f"{qtype}_connected_queries_len{lengths}_min{connected_overlap}.txt"),
-        origin_path=os.path.join(config["queries_output_dir"], f"{qtype}_plain_queries_len{lengths}.txt"),
-        output_path=config["recovery_output_dir"]
-    )
-
-    num = 0
-    CredentialGuessing.run_guessing_and_match_hashes_rPGM_ideal(
-        normal_guess_file_path=recovery_config["baseline_path"],
-        guess_file_path=os.path.join(config["recovery_output_dir"], f"guess_list/ideal_guess_exp{num}.txt"),
-        origin_path=os.path.join(config["recovery_output_dir"], f"guess_list/ideal_select_exp{num}.txt"),
-        output_path=os.path.join(config["output_guess_result"], f"{qtype}_final_results_len{lengths}_ideal_exp{num}.txt"),
-        leak_set_path=split_cfg["output_leak_path"],
-        query_set_path=split_cfg["output_source_path"]
-    )
-
-    num = 0
     leak_set = set()
     leak_set = load_leaked_dataset(split_cfg["output_leak_path"], qtype)
     CredentialGuessing.run_guessing_and_match_hashes_rPGM(
         normal_guess_file_path=recovery_config["baseline_path"],
-        guess_file_path=os.path.join(config["recovery_output_dir"], f"guess_list/connect_guess_exp{num}.txt"),
-        connected_result_path=os.path.join(config["recovery_output_dir"], f"{qtype}_connected_queries_len{lengths}_min{connected_overlap}.txt"),
-        origin_path=os.path.join(config["recovery_output_dir"], f"guess_list/connect_select_exp{num}.txt"),
-        output_path=os.path.join(config["output_guess_result"], f"{qtype}_final_results_len{lengths}_connect_exp{num}.txt"),
-        leak_set=leak_set
-    )
-
-    num = 0
-    CredentialGuessing.run_guessing_and_match_hashes_rPGM_usename(
+        guess_file_path=os.path.join(config["recovery_output_dir"], f"guess_list/connect_guess.txt"),
         connected_result_path=os.path.join(config["recovery_output_dir"], f"{qtype}_connected_queries_len{lengths}_min{connected_overlap}.txt"),
         origin_path=os.path.join(config["queries_output_dir"], f"{qtype}_plain_queries_len{lengths}.txt"),
-        output_path=os.path.join(config["output_guess_result"], f"{qtype}_final_results_len{lengths}_connect_exp{num}.txt"),
-        leak_set_path=split_cfg["output_leak_path"]
+        output_path=os.path.join(config["output_guess_result"], f"{qtype}_final_results_len{lengths}_connect.txt"),
+        leak_set=leak_set
     )
 
 
