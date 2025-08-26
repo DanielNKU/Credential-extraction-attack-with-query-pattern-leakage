@@ -7,7 +7,9 @@ This project is the artifact for the paper **"Credential Extraction Attacks Agai
 - `credential connecting attack`
 - `credential guessing attack`
 
-We release this artifact to support open science and ensure the reproducibility of our results.
+Given that our threat model is based on an honest-but-curious C3 server, this attack cannot be carried out by a typical network attacker, and we believe that C3 services, such as HIBP and GPC, will not actively conduct such an attack. While our open-sourced artifact does not pose a significant threat to PMs, we still take care to balance reproducibility with the security of PM vendors.
+
+Our artifact includes the code for query simulation, as well as attack examples, including $l$-identifying, range combining, credential connecting, and credential guessing. We do not open the dataset or the password guessing model, as they are not part of our contributions and are publicly accessible. However, we provide guidance on how to integrate the dataset and the password guessing model into our example code.
 
 ---
 
