@@ -10,9 +10,8 @@ Attack modules can load the generated query files and simulate attacks based on 
 
 Recommended file storage:
 - Original dataset:     data/original_dataset.txt
-- Leaked dataset:       data/leaked_dataset.txt
-- Query source dataset: data/query_source_dataset.txt
-- Generated queries:    intermediate/queries/queries_<scenario>_<type>.txt
+- Leaked dataset:       data/leaked.txt
+- Query source dataset: data/query_source.txt
 """
 
 from tqdm import tqdm
