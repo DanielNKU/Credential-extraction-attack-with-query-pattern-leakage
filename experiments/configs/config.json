@@ -11,10 +11,10 @@
       "num_queries": 200000000,
       "query_type": "pass",
       "scenario_config": {
-        "asyn": 1,
-        "clean": 1,
-        "intercept": 0.1, 
-        "active": 0.01
+        "asyn": 0,
+        "clean": 0,
+        "intercept": 0, 
+        "active": 0
       } 
     },
     "identification_attack": {

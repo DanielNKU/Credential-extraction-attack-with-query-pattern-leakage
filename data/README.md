@@ -7,7 +7,7 @@ For ethical consideration, we do not include real breach dataset in our project.
 * Ensure the format is compatible (see `src/query_simulation.py`)
 
 
-Furthermore, the simulated leaked dataset `leaked_dataset.txt` and  query source `query_source_dataset.txt` are also stored in this folder. The data format for `original_dataset.txt`, `leaked_dataset.txt`, and `query_source_dataset.txt` for one line in the text file is:
+Furthermore, the simulated leaked dataset `leaked.txt` and  query source `query_source.txt` are also stored in this folder. The data format for `original_dataset.txt`, `leaked.txt`, and `query_source.txt` for one line in the text file is:
 
 ```
 (u1, pw1)\t(u2,pw2)\t(u3,pw3)

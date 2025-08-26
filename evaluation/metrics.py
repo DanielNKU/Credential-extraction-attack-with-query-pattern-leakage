@@ -131,7 +131,6 @@ def calculate_ideal_connected(leak_set_path, query_set_path, origin_path, query_
             pos += 1
     
     success = 0
-    # output = True
     with open(origin_path, 'r', encoding='utf8') as f:
         for line in tqdm(f):
             posp, _, unmatches_list, plaintext = eval(line)
@@ -145,10 +144,6 @@ def calculate_ideal_connected(leak_set_path, query_set_path, origin_path, query_
                 continue
             best_idx = max(counter, key=lambda x: counter[x])
             if counter[best_idx] >= overlap:
-                #if output:
-                    #print(connected_list[best_idx])
-                    #print(plaintext)
-                    #output = False
                 success += 1
 
     return success
